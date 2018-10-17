@@ -1,0 +1,42 @@
+﻿@page "/clockproblem"
+
+<h1>ClockProblem</h1>
+
+<p>How many degrees are there in the angle between the hour and minute hands of a clock when the time 4:15?</p>
+<div>
+    <div class="form-row">
+        <div class="col">
+            <label>
+                Please enter the hour
+            </label>
+            <input type="text" placeholder="Enter a the hour" bind="@hour" class="form-control" />
+        </div>
+        <div class="col">
+            <label>
+                Please enter the minutes
+            </label>
+            <input type="text" placeholder="Enter a the minute" bind="@minute" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <button onclick="@FindDegrees">Find the degrees between</button>
+
+        <h2>The degrees between them are @angle°</h2>
+    </div>
+</div>
+
+@functions {
+int hour, minute;
+double angle;
+
+void FindDegrees()
+{
+    if ((hour > 0 && hour < 24) && (minute > 0 && minute < 60))
+    {
+        double hAngle = 0.5D * ((hour % 12) * 60 + minute);
+        double mAngle = 6 * minute;
+        angle = Math.Abs(hAngle - mAngle);
+        angle = Math.Min(angle, 360 - angle);
+    }
+}
+}
